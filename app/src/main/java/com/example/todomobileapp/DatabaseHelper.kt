@@ -10,7 +10,7 @@ import com.example.todomobileapp.R
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        private const val DATABASE_VERSION = 8
+        private const val DATABASE_VERSION = 9
         private const val DATABASE_NAME = "taskManager"
         private const val TABLE_TASKS = "tasks"
         private const val KEY_ID = "id"

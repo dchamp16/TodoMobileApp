@@ -1,7 +1,0 @@
-<animation-list xmlns:android="http://schemas.android.com/apk/res/android" android:oneshot="false">
-    <item android:drawable="@drawable/color_frame_1" android:duration="200" />
-    <item android:drawable="@drawable/color_frame_2" android:duration="200" />
-    <item android:drawable="@drawable/color_frame_3" android:duration="200" />
-    <item android:drawable="@drawable/color_frame_4" android:duration="200" />
-    <item android:drawable="@drawable/color_frame_5" android:duration="200" />
-</animation-list>

@@ -118,19 +118,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-<!-- remove this -->
-
-    <Button
-        android:id="@+id/btnShowAnimation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Show Animation"
-        android:tooltipText="When tap a frame of color will display\nit will shut 2 second using CountDownTimer"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    android:layout_marginBottom="16dp" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

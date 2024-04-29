@@ -79,50 +79,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnClear.setOnClickListener { clearTasks() }
 
         // New button for showing animation
-        binding.btnShowAnimation.setOnClickListener { showColorFrameAnimation() }
     }
-
-    //delete this in final project
-    private fun showColorFrameAnimation() {
-        val totalAnimationTime = 2000L // Total time the animation should play (2 seconds)
-
-        val animationDrawable = AnimationDrawable().apply {
-            addFrame(ContextCompat.getDrawable(this@MainActivity, R.drawable.color_frame_1)!!, 400)
-            addFrame(ContextCompat.getDrawable(this@MainActivity, R.drawable.color_frame_2)!!, 400)
-            addFrame(ContextCompat.getDrawable(this@MainActivity, R.drawable.color_frame_3)!!, 400)
-            addFrame(ContextCompat.getDrawable(this@MainActivity, R.drawable.color_frame_4)!!, 400)
-            addFrame(ContextCompat.getDrawable(this@MainActivity, R.drawable.color_frame_5)!!, 400)
-            isOneShot = true
-        }
-
-        val popupView = layoutInflater.inflate(R.layout.popup_animation, null)
-        val imageView: ImageView = popupView.findViewById(R.id.animationImage)
-        imageView.background = animationDrawable
-
-        val popupWindow = PopupWindow(popupView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, true).apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            showAtLocation(binding.root, Gravity.CENTER, 0, 0)
-        }
-
-        imageView.post { animationDrawable.start() }
-
-        // Use CountDownTimer to close the popup after 2 seconds
-        object : CountDownTimer(totalAnimationTime, totalAnimationTime) {
-            override fun onTick(millisUntilFinished: Long) {
-            }
-
-            override fun onFinish() {
-                popupWindow.dismiss()
-            }
-        }.start()
-
-        // Allow user to dismiss the popup manually by clicking on it
-        imageView.setOnClickListener {
-            popupWindow.dismiss()
-        }
-    }
-
-
 
 
     private fun addNewTaskFromInput() {
