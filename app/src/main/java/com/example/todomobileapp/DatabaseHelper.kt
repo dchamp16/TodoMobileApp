@@ -1,11 +1,11 @@
-import android.annotation.SuppressLint
+package com.example.todomobileapp
+
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import com.example.todomobileapp.Task
-import com.example.todomobileapp.R
+
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -142,11 +142,16 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun printAllData() {
-        val allTasks = getAllTasks()
-        allTasks.forEach { task ->
-            Log.d("DatabaseHelper", "Task ID: ${task.id}, Title: ${task.title}, Description: ${task.description}")
+        val tasks = getAllTasks()
+        if (tasks.isEmpty()) {
+            Log.d("Database", "No tasks found")
+        } else {
+            for (task in tasks) {
+                Log.d("Database", "Task: ${task.title}, Description: ${task.description}")
+            }
         }
     }
+
 
 
     fun doQuery(category: String): List<Task> {
