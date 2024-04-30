@@ -71,13 +71,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayWeather() {
         val location = getLocation()
-        location?.let {
-            Log.d("WeatherApp", "Location found: ${it.latitude}, ${it.longitude}")
-            weatherService.getWeather(it.latitude, it.longitude, API_KEY).enqueue(object : Callback<WeatherResponse> {
+        location?.let { loc ->
+            Log.d("WeatherApp", "Location found: ${loc.latitude}, ${loc.longitude}")
+            weatherService.getWeather(loc.latitude, loc.longitude, API_KEY).enqueue(object : Callback<WeatherResponse> {
                 override fun onResponse(call: Call<WeatherResponse>, response: Response<WeatherResponse>) {
                     if (response.isSuccessful) {
                         response.body()?.let { weather ->
-                            val weatherText = "Temperature: ${weather.main.temp}°C, Description: ${weather.weather[0].description}"
+                            // Updated text to include location coordinates
+                            val weatherText = "It's currently ${weather.main.temp}°C with ${weather.weather[0].description} at " +
+                                    "\nlatitude: ${loc.latitude}\n longitude: ${loc.longitude}."
                             binding.tvWeather.text = weatherText
                             Log.d("WeatherApp", "Weather displayed successfully")
                         }
@@ -92,8 +94,12 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Failed to retrieve weather data", Toast.LENGTH_LONG).show()
                 }
             })
-        } ?: Log.e("WeatherApp", "Location is null")
+        } ?: run {
+            Log.e("WeatherApp", "Location is null")
+            Toast.makeText(applicationContext, "Location not found", Toast.LENGTH_LONG).show()
+        }
     }
+
 
     private fun getLocation(): Location? {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
