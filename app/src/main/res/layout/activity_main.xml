@@ -13,15 +13,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Loading weather..."
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:fontFamily="@font/roboto_light"
-        android:textStyle="normal"
+        android:textStyle="bold"
         android:textColor="@android:color/black"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- ProgressBar for loading indication -->
     <ProgressBar
@@ -63,7 +62,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="1"/>
 
-
     <!-- Spinner for Category Selection -->
     <Spinner
         android:id="@+id/spinnerCategory"
@@ -73,7 +71,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="1"/>
-
 
     <Button
         android:id="@+id/btnAdd"
@@ -86,7 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="1"/>
-
 
     <Button
         android:id="@+id/btnPopulate"
@@ -151,7 +147,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

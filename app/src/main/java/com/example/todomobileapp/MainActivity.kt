@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +48,21 @@ class MainActivity : AppCompatActivity() {
         setupSpinners()
         setupButtonListeners()
         checkLocationPermissionAndDisplayWeather()
+    }
+
+    private fun showTaskDetails(task: Task) {
+        val inflater = LayoutInflater.from(this)
+        val view = inflater.inflate(R.layout.dialog_task_details, null)
+        val titleText: TextView = view.findViewById(R.id.tvTaskTitle)
+        val descriptionText: TextView = view.findViewById(R.id.tvTaskDescription)
+
+        titleText.text = task.title
+        descriptionText.text = task.description
+
+        AlertDialog.Builder(this)
+            .setView(view)
+            .setPositiveButton("Close") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
     private fun setupRetrofit() {
@@ -113,9 +129,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         binding.tasksRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.tasksRecyclerView.adapter = TaskAdapter(databaseHelper.getAllTasks().toMutableList(), this::editTask, this::deleteTask)
-
+        binding.tasksRecyclerView.adapter = TaskAdapter(databaseHelper.getAllTasks().toMutableList(), this::editTask, this::deleteTask, this)
+        updateRecyclerView()
     }
+
 
     private fun setupSpinners() {
         val categories = arrayOf("Work", "Home", "Personal")
@@ -208,7 +225,8 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun updateRecyclerView() {
-        binding.tasksRecyclerView.adapter = TaskAdapter(databaseHelper.getAllTasks().toMutableList(), this::editTask, this::deleteTask)
+        binding.tasksRecyclerView.adapter = TaskAdapter(databaseHelper.getAllTasks().toMutableList(), this::editTask, this::deleteTask, this)
     }
+
 
 }
