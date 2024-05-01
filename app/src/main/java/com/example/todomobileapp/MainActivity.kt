@@ -176,24 +176,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun editTask(task: Task) {
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_edit_task, null)
-        val editText = dialogView.findViewById<EditText>(R.id.editTextTaskDescription)
-        editText.setText(task.description)
+        val titleEditText = dialogView.findViewById<EditText>(R.id.editTextTaskTitle)
+        val descriptionEditText = dialogView.findViewById<EditText>(R.id.editTextTaskDescription)
+
+        // Set existing values
+        titleEditText.setText(task.title)
+        descriptionEditText.setText(task.description)
 
         AlertDialog.Builder(this)
             .setTitle("Edit Task")
             .setView(dialogView)
             .setPositiveButton("Save") { dialog, _ ->
-                val updatedDescription = editText.text.toString()
-                // Create a new Task object with updated information if needed
-                val updatedTask = task.copy(description = updatedDescription)
-                databaseHelper.updateTask(updatedTask)
-                updateRecyclerView()
+                // Retrieve the updated values from EditText fields
+                val updatedTitle = titleEditText.text.toString().trim()
+                val updatedDescription = descriptionEditText.text.toString().trim()
+
+                // Update the task object if the title or description has changed
+                if (task.title != updatedTitle || task.description != updatedDescription) {
+                    task.title = updatedTitle
+                    task.description = updatedDescription
+                    databaseHelper.updateTask(task)
+                    updateRecyclerView()
+                }
                 dialog.dismiss()
             }
             .setNegativeButton("Cancel", { dialog, _ -> dialog.cancel() })
             .create()
             .show()
     }
+
 
 
     private fun updateRecyclerView() {

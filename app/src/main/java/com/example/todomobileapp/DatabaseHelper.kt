@@ -38,12 +38,13 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val values = ContentValues().apply {
             put(KEY_TITLE, task.title)
             put(KEY_DESCRIPTION, task.description)
-            put(KEY_CATEGORY, task.category)
+            put(KEY_CATEGORY, task.category) // Assuming category can also be edited if needed
             put(KEY_COMPLETED, if (task.isCompleted) 1 else 0)
         }
         db.update(TABLE_TASKS, values, "$KEY_ID = ?", arrayOf(task.id.toString()))
         db.close()
     }
+
 
 
 

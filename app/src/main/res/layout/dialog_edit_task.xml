@@ -4,9 +4,20 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
+
+    <EditText
+        android:id="@+id/editTextTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title"
+        android:inputType="textCapSentences"/>
+
     <EditText
         android:id="@+id/editTextTaskDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Task description"/>
+        android:hint="Description"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="8dp"/>
+
 </LinearLayout>
